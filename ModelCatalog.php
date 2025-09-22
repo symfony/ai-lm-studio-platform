@@ -11,11 +11,13 @@
 
 namespace Symfony\AI\Platform\Bridge\LmStudio;
 
-use Symfony\AI\Platform\Model;
+use Symfony\AI\Platform\ModelCatalog\DynamicModelCatalog;
 
 /**
- * @author André Lubian <lubiana123@gmail.com>
+ * @author Oskar Stark <oskarstark@googlemail.com>
  */
-class Completions extends Model
+final class ModelCatalog extends DynamicModelCatalog
 {
+    // LmStudio can use any model that is loaded locally
+    // Models are dynamically available based on what's loaded in LmStudio
 }
