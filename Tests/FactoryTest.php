@@ -12,7 +12,7 @@
 namespace Symfony\AI\Platform\Bridge\LmStudio\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Symfony\AI\Platform\Bridge\LmStudio\PlatformFactory;
+use Symfony\AI\Platform\Bridge\LmStudio\Factory;
 use Symfony\AI\Platform\Platform;
 use Symfony\Component\HttpClient\EventSourceHttpClient;
 use Symfony\Component\HttpClient\MockHttpClient;
@@ -20,18 +20,18 @@ use Symfony\Component\HttpClient\MockHttpClient;
 /**
  * @author Oskar Stark <oskarstark@googlemail.com>
  */
-final class PlatformFactoryTest extends TestCase
+final class FactoryTest extends TestCase
 {
     public function testItCreatesPlatformWithDefaultSettings()
     {
-        $platform = PlatformFactory::create();
+        $platform = Factory::createPlatform();
 
         $this->assertInstanceOf(Platform::class, $platform);
     }
 
     public function testItCreatesPlatformWithCustomBaseUrl()
     {
-        $platform = PlatformFactory::create('http://localhost:8080');
+        $platform = Factory::createPlatform('http://localhost:8080');
 
         $this->assertInstanceOf(Platform::class, $platform);
     }
@@ -39,7 +39,7 @@ final class PlatformFactoryTest extends TestCase
     public function testItCreatesPlatformWithCustomHttpClient()
     {
         $httpClient = new MockHttpClient();
-        $platform = PlatformFactory::create('http://localhost:1234', $httpClient);
+        $platform = Factory::createPlatform('http://localhost:1234', $httpClient);
 
         $this->assertInstanceOf(Platform::class, $platform);
     }
@@ -47,7 +47,7 @@ final class PlatformFactoryTest extends TestCase
     public function testItCreatesPlatformWithEventSourceHttpClient()
     {
         $httpClient = new EventSourceHttpClient(new MockHttpClient());
-        $platform = PlatformFactory::create('http://localhost:1234', $httpClient);
+        $platform = Factory::createPlatform('http://localhost:1234', $httpClient);
 
         $this->assertInstanceOf(Platform::class, $platform);
     }
